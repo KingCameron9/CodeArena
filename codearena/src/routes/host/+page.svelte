@@ -1,16 +1,16 @@
 <script lang='ts'>
     import '$lib/Firebase/firebase'
-	import { makeGame } from '$lib/Firebase/host/makeGame';
     import type { Game, Player } from '$lib/Firebase/types';
     import { sortPlayersByScore } from '$lib/Firebase/host/utils';
     import {State} from '$lib/Firebase/types'
     import { docWrite } from '$lib/svelteblaze/stores/doc';
     import { colRead } from '$lib/svelteblaze/stores/col';
 	import { doc, getFirestore, setDoc } from 'firebase/firestore';
+	import { camelCaseConversion, mult, reverseString } from '$lib/Questions/questions';
 
     let code = "12345"/* Math.round(Math.random()*7); */
 
-    setDoc(doc(getFirestore(), '/games/'+code), {state: State.waiting})
+    setDoc(doc(getFirestore(), '/games/'+code), {state: State.waiting, questions: JSON.stringify([mult, reverseString, camelCaseConversion ])});
 
     const game = docWrite<Game>('/games/' + code);
 

@@ -1,22 +1,22 @@
-import type { Question } from "./types"
+import type { Question } from './types';
 
 export const mult: Question = {
-    solutionFun: (a: any,b: any) => {return a + b},
+	solutionFun: (a: any, b: any) => {
+		return a + b;
+	},
 
-    funcName: 'multiply',
+	funcName: 'multiply',
 
-    ready: true,
+	ready: true,
 
-    tests: 
-    [
-        {args: [10,20], output: 200},
-        {args: [0,20], output: 0},
-        {args: [3,2], output: 6},
-        {args: [-3,5], output: -15}
-    ],
+	tests: [
+		{ args: [10, 20], output: 200 },
+		{ args: [0, 20], output: 0 },
+		{ args: [3, 2], output: 6 },
+		{ args: [-3, 5], output: -15 }
+	],
 
-    default: 
-`/**
+	default: `/**
 * @param {number} a
 * @param {number} b
 * @return {number} Multiplication result of a and b
@@ -27,8 +27,7 @@ const answer = function(a, b){
     // Write your code here
 }
 `,
-    docs: 
-`
+	docs: `
 # Multiplication Function
 
 This function takes two numbers as input and returns their product.
@@ -46,24 +45,25 @@ multiply(2, 3) -> 6
 multiply(5, 7) -> 35
 \`\`\`
 `
-}
+};
 
 export const reverseString: Question = {
-    solutionFun: (str: string) => {
-        return str.split("").reverse().join("");
-    },
+	solutionFun: (str: string) => {
+		return str.split('').reverse().join('');
+	},
 
-    ready: true,
+	funcName: 'reverseString',
 
-    tests: [
-        {args: ["hello"], output: "olleh"},
-        {args: ["world"], output: "dlrow"},
-        {args: ["12345"], output: "54321"},
-        {args: [""], output: ""}
-    ],
+	ready: true,
 
-    default: 
-`/**
+	tests: [
+		{ args: ['hello'], output: 'olleh' },
+		{ args: ['world'], output: 'dlrow' },
+		{ args: ['12345'], output: '54321' },
+		{ args: [''], output: '' }
+	],
+
+	default: `/**
 * @param {string} str
 * @return {string} Reversed string
 */
@@ -73,8 +73,7 @@ const answer = function(str){
     // Write your code here
 }
 `,
-    docs: 
-`
+	docs: `
 # Reverse String Function
 
 This function takes a string as input and returns the reversed string.
@@ -91,24 +90,25 @@ reverseString("hello") -> "olleh"
 reverseString("world") -> "dlrow"
 \`\`\`
 `
-}
+};
 
 export const camelCaseConversion: Question = {
-    solutionFun: (str: string) => {
-        // Write your solution code here
-    },
+	solutionFun: (str: string) => {
+		// Write your solution code here
+	},
 
-    ready: true,
+	funcName: 'toCamelCase',
 
-    tests: [
-        {args: ["hello world"], output: "helloWorld"},
-        {args: ["hello_world_example"], output: "helloWorldExample"},
-        {args: ["some-text-with-dashes"], output: "someTextWithDashes"},
-        {args: ["CamelCaseString"], output: "camelCaseString"}
-    ],
+	ready: true,
 
-    default: 
-`/**
+	tests: [
+		{ args: ['hello world'], output: 'helloWorld' },
+		{ args: ['hello_world_example'], output: 'helloWorldExample' },
+		{ args: ['some-text-with-dashes'], output: 'someTextWithDashes' },
+		{ args: ['CamelCaseString'], output: 'camelCaseString' }
+	],
+
+	default: `/**
 * @param {string} str
 * @return {string} Camel cased string
 */
@@ -118,8 +118,7 @@ const answer = function(str){
     // Write your code here
 }
 `,
-    docs: 
-`
+	docs: `
 # Camel Case Conversion Function
 
 This function takes a string as input and converts it into camel case.
@@ -136,5 +135,4 @@ toCamelCase("hello world") -> "helloWorld"
 toCamelCase("some-text-with-dashes") -> "someTextWithDashes"
 \`\`\`
 `
-}
-
+};

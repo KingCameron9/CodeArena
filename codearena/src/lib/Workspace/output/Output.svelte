@@ -4,11 +4,15 @@
 	import { questionStore, setQuestion } from "$lib/Questions/set";
     import type {Question} from '$lib/Questions/types'
     import type {FuncResult} from '$lib/Workspace/output/evaluate'
-
+    import {questionNumber} from '$lib/Workspace/game/game'
     let message: FuncResult | true; 
 
     function run(){
         message = evaluate($questionStore);
+
+        if(message.success){
+            $questionNumber += 1;
+        }
     }
 </script>
 

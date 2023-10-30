@@ -1,3 +1,5 @@
+import type { Question } from '$lib/Questions/types';
+
 export type Player = {
 	points: number;
 	uid: string;
@@ -5,6 +7,7 @@ export type Player = {
 };
 
 export type Game = {
+	questions: string;
 	state: State;
 };
 
