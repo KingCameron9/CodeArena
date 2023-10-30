@@ -1,57 +1,51 @@
 import type { Question } from './types';
 
-export const mult: Question = {
-	solutionFun: (a: any, b: any) => {
-		return a + b;
-	},
-
-	funcName: 'multiply',
+export const pythagorean: Question = {
+	funcName: 'pythagorean',
 
 	ready: true,
 
 	tests: [
-		{ args: [10, 20], output: 200 },
-		{ args: [0, 20], output: 0 },
-		{ args: [3, 2], output: 6 },
-		{ args: [-3, 5], output: -15 }
+		{ args: [3, 4], output: 5 },
+		{ args: [0, 3], output: 3 },
+		{ args: [5, 0], output: 5 },
+		{ args: [5, 12], output: 13 },
+		{ args: [7, 24], output: 25 }
 	],
 
 	default: `/**
 * @param {number} a
 * @param {number} b
-* @return {number} Multiplication result of a and b
+* @return {number} returns c given the pythagorean theorem sqrt(a^2 + b^2) = c
 */
 
-//function must be called "answer"
-const answer = function(a, b){
+//function must be called "pythagorean"
+function pythagorean(a, b) {
     // Write your code here
 }
 `,
 	docs: `
-# Multiplication Function
+# pythagorean Function
 
-This function takes two numbers as input and returns their product.
+This function takes two numbers as input and returns them using the pythagorean theorem.
 
 ## Parameters:
 - **a** (number): The first number.
 - **b** (number): The second number.
 
 ## Returns:
-- (number): The product of a and b.
+- (number): c
 
 ## Example:
 \`\`\`
-multiply(2, 3) -> 6
-multiply(5, 7) -> 35
+pythagorean(3, 4) -> 5
+pythagorean(0, 3) -> 3
+pythagorean(5, 0) -> 5
 \`\`\`
 `
 };
 
 export const reverseString: Question = {
-	solutionFun: (str: string) => {
-		return str.split('').reverse().join('');
-	},
-
 	funcName: 'reverseString',
 
 	ready: true,
@@ -60,7 +54,8 @@ export const reverseString: Question = {
 		{ args: ['hello'], output: 'olleh' },
 		{ args: ['world'], output: 'dlrow' },
 		{ args: ['12345'], output: '54321' },
-		{ args: [''], output: '' }
+		{ args: ['drew'], output: 'werd' },
+		{ args: ['sammy'], output: 'ymmas' }
 	],
 
 	default: `/**
@@ -69,7 +64,7 @@ export const reverseString: Question = {
 */
 
         //function must be called "answer"
-const answer = function(str){
+const reverseString = function(str){
     // Write your code here
 }
 `,
@@ -93,19 +88,15 @@ reverseString("world") -> "dlrow"
 };
 
 export const camelCaseConversion: Question = {
-	solutionFun: (str: string) => {
-		// Write your solution code here
-	},
-
 	funcName: 'toCamelCase',
 
 	ready: true,
 
 	tests: [
-		{ args: ['hello world'], output: 'helloWorld' },
+		{ args: ['hello_world'], output: 'helloWorld' },
 		{ args: ['hello_world_example'], output: 'helloWorldExample' },
-		{ args: ['some-text-with-dashes'], output: 'someTextWithDashes' },
-		{ args: ['CamelCaseString'], output: 'camelCaseString' }
+		{ args: ['some_text'], output: 'someText' },
+		{ args: ['camel_caseString'], output: 'camelCaseString' }
 	],
 
 	default: `/**
@@ -114,7 +105,7 @@ export const camelCaseConversion: Question = {
 */
 
 //function must be called "answer"
-const answer = function(str){
+const toCamelCase = function(str){
     // Write your code here
 }
 `,
@@ -131,8 +122,10 @@ This function takes a string as input and converts it into camel case.
 
 ## Example:
 \`\`\`
-toCamelCase("hello world") -> "helloWorld"
-toCamelCase("some-text-with-dashes") -> "someTextWithDashes"
+toCamelCase("hello_world") -> "helloWorld"
+toCamelCase("some_text") -> "someText"
+toCamelCase("some_text") -> "someText"
+toCamelCase("snake_case_is_cool") -> "snakeCaseIsCool"
 \`\`\`
 `
 };

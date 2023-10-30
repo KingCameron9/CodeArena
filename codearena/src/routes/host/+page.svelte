@@ -6,11 +6,11 @@
     import { docWrite } from '$lib/svelteblaze/stores/doc';
     import { colRead } from '$lib/svelteblaze/stores/col';
 	import { doc, getFirestore, setDoc } from 'firebase/firestore';
-	import { camelCaseConversion, mult, reverseString } from '$lib/Questions/questions';
+	import { camelCaseConversion, pythagorean, reverseString } from '$lib/Questions/questions';
 
     let code = "12345"/* Math.round(Math.random()*7); */
 
-    setDoc(doc(getFirestore(), '/games/'+code), {state: State.waiting, questions: JSON.stringify([mult, reverseString, camelCaseConversion ])});
+    setDoc(doc(getFirestore(), '/games/'+code), {state: State.waiting, questions: JSON.stringify([pythagorean, reverseString, camelCaseConversion ])});
 
     const game = docWrite<Game>('/games/' + code);
 

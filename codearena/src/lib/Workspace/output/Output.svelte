@@ -9,6 +9,7 @@
 
     function run(){
         message = evaluate($questionStore);
+        console.log(JSON.stringify(message));
 
         if(message.success){
             $questionNumber += 1;
@@ -16,9 +17,12 @@
     }
 </script>
 
+
+
 {#if $questionStore.ready }
     
     <button on:click={run}>run</button>
+    <button on:click={() => {$questionNumber += 1}}>skip</button>
 
 
 {/if}

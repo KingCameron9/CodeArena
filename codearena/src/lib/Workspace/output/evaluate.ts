@@ -1,62 +1,61 @@
 import { playerState } from '$lib/Firebase/play/playerState';
 import type { Question, Test } from '$lib/Questions/types';
 import { editor } from '../monaco/monaco';
-import * as vm from 'vm-browserify'
+import * as vm from 'vm-browserify';
 
-export type FuncResult= {
-	sucess: boolean,
-	errored?: boolean,
-	errorMessage?: string,
-	expectedOutput?: string,
-	output?: string
-}
+export type FuncResult = {
+	sucess: boolean;
+	errored?: boolean;
+	errorMessage?: string;
+	expectedOutput?: string;
+	output?: string;
+	input?: string;
+};
 
 //run function in safe context
-function runFunc(code: string, funcName: string, expectedResult: any, input: any[]): FuncResult{
+function runFunc(code: string, funcName: string, expectedResult: any, input: any[]): FuncResult {
 	let res;
-	
-	let inputs = input.join(',');
 
-	try{
+	try {
 		//kinda sketchy but does work
-		res = vm.runInNewContext(code + ';\n' + funcName + '(' + inputs + ')');
-	}
-	catch(e: any){
+		res = vm.runInNewContext(code + ';\n' + funcName);
+		res = res(...input);
+		console.log(res);
+	} catch (e: any) {
 		return {
 			sucess: false,
 			errored: true,
 			errorMessage: e.toString()
-
-		}
-
+		};
 	}
 
-	if(res != expectedResult){
+	if (res != expectedResult) {
 		return {
 			sucess: false,
-			expectedOutput: expectedResult,
-			output: res
-		}
+			expectedOutput: expectedResult.toString(),
+			output: res.toString(),
+			input: input.toString()
+		};
 	}
 
 	return {
 		sucess: true
-	}	
+	};
 }
 
-export function evaluate(question: Question): {res?: FuncResult, success: boolean}{
+export function evaluate(question: Question): { res?: FuncResult; success: boolean } {
 	const code = editor.getValue();
 
-	let res = {success: true};
+	let res = { success: true };
 
 	question.tests.forEach((test) => {
 		const result = runFunc(code, question.funcName, test.output, test.args);
 
-		if(!result.sucess){
-			res = {success: false, res: result};
+		if (!result.sucess) {
+			res = { success: false, res: result };
 			return;
 		}
-	})
+	});
 	console.log('succ');
 	return res;
 }
