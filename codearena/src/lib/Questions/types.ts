@@ -4,16 +4,7 @@ export type Question = {
 	default: string;
 	tests: Test[];
 	docs: string;
-};
-
-export type ReturnMessage = {
-	success: boolean;
-	caseNumber: number;
-	expectedOutput: string;
-	output: string;
-	input: string;
-	errored: boolean;
-	error: string;
+	funcName: string;
 };
 
 export type Test = {

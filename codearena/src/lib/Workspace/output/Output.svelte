@@ -2,45 +2,35 @@
 	import { onMount } from "svelte";
 	import { evaluate } from "./evaluate";
 	import { questionStore, setQuestion } from "$lib/Questions/set";
-    import type {Question, ReturnMessage} from '$lib/Questions/types'
+    import type {Question} from '$lib/Questions/types'
+    import type {FuncResult} from '$lib/Workspace/output/evaluate'
 
-    onMount(() => {
-    })
-
-    let question: Question;
-
-    questionStore.subscribe((sq) => {question = sq})
-
-    let message: ReturnMessage; 
-    let ran: boolean;
+    let message: FuncResult | true; 
 
     function run(){
-        ran=  true;
-        message = evaluate(question);
-        
-
+        message = evaluate($questionStore);
     }
 </script>
 
-{#if question.ready }
+{#if $questionStore.ready }
     
     <button on:click={run}>run</button>
 
 
 {/if}
-{#if ran}
+
+{#if message!=null}
     {#if message.success}
         <p style='font-size: 30px; color: green'>Correct Answer</p>   
 
     {:else}
-        <p style='font-size: 30px; color: red'>Incorrect Answer in case {message.caseNumber}</p>   
-        <p style='color: white; font-size: 20px'> Input: {message.input}</p>
-        {#if message.errored}
-            <p style='color: red; font-size: 20px'>Output: {message.error}</p>
+        <p style='color: white; font-size: 20px'> Input: {message.res.input}</p>
+        {#if message.res.errored}
+            <p style='color: red; font-size: 20px'>Output: {message.res.errorMessage}</p>
         {:else}
-            <p style='color: white; font-size: 20px' >Output: {message.output}</p>
+            <p style='color: white; font-size: 20px' >Output: {message.res.output}</p>
         {/if}
-        <p style='color: white; font-size: 20px' >Expected Output: {message.expectedOutput}</p>
+        <p style='color: white; font-size: 20px' >Expected Output: {message.res.expectedOutput}</p>
         
     {/if}
         

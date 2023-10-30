@@ -3,6 +3,8 @@ import type { Question } from "./types"
 export const mult: Question = {
     solutionFun: (a: any,b: any) => {return a + b},
 
+    funcName: 'multiply',
+
     ready: true,
 
     tests: 

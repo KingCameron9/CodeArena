@@ -35,6 +35,7 @@
 		"isolated-vm": "^4.6.0",
 		"monaco-editor": "^0.43.0",
 		"svelte-markdown": "^0.4.0",
-		"svelte-splitpanes": "^0.8.0"
+		"svelte-splitpanes": "^0.8.0",
+		"vm-browserify": "^1.1.2"
 	}
 }
