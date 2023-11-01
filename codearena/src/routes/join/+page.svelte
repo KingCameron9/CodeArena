@@ -5,8 +5,8 @@
     import {joinInfo} from '$lib/Firebase/play/gameInfo'
 
 
-    let codeInput: HTMLInputElement;
-    let nameInput: HTMLInputElement;
+    let codeInput;
+    let nameInput;
 
     let codeFailed = false;
 

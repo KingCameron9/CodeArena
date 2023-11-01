@@ -31,9 +31,9 @@
             console.log('it was done');
             const jsConfetti = new JSConfetti();
             jsConfetti.addConfetti();
-            $player.points == -1;
+            $player.points == $game.time+1000;
             $player.finished = true;
-            $player.finishedTime = $game.time;
+            $player.finishedTime = Math.abs($game.time-100);
         }
 
     })

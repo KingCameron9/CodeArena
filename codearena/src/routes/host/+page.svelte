@@ -9,13 +9,15 @@
 	import { camelCaseConversion, pythagorean, reverseString, longestSubstringWithoutRepeating, stringCompression } from '$lib/Questions/questions';
     import JSConfetti from 'js-confetti'
 
-    let code = "ABC" //Math.round(Math.random()*100000);
+    let code = Math.round(Math.random()*100000);
 
-    setDoc(doc(getFirestore(), '/games/'+code), {time: 100, state: State.waiting, questions: JSON.stringify([pythagorean, reverseString, camelCaseConversion, longestSubstringWithoutRepeating, stringCompression ])});
+    setDoc(doc(getFirestore(), '/games/'+code), {time: 300, state: State.waiting, questions: JSON.stringify([pythagorean, reverseString, camelCaseConversion, longestSubstringWithoutRepeating, stringCompression ])});
 
     const game = docWrite<Game>('/games/' + code);
 
     let wait = -1;
+
+    let text = "Scorebard"
 
 
     function startGame(){
@@ -36,6 +38,7 @@
                         if($game.time < 1){
                             const jsConfetti = new JSConfetti();
                             jsConfetti.addConfetti();
+                            text = "Final Scoreboard"
                             
                         }
                         else{
@@ -78,7 +81,7 @@ font-size: 25px;
         {#if wait == -1}
             <button id="start-button" on:click={startGame}>Start game</button>
         {:else}
-            <p style="font-size: 25px; margin-bottom: 0">Starting in... {wait}</p>
+            <p style="font-size: 25px; margin-bottom: 0">Starting in... {wait} seconds</p>
         {/if}
 
         <div class="players-container">
@@ -91,11 +94,17 @@ font-size: 25px;
     {/if}
 
     {#if $game?.state === State.playing}
-        <p style="font-size: 30px;">Scoreboard</p>
+        <p style="font-size: 30px;">{text}</p>
 
         <div class='player-container' style='flex-direction: column;width: 50%; overflow: hidden; size: 30px'>
             {#each sortPlayersByScore($players) as player}
-                <p>{player.index}. {player.id} {player.points}</p>
+                {#if player.finishedTime != null}
+                    <p style="color: green">{player.index}. {player.id} Finished in {player.finishedTime} seconds</p>
+                {:else}
+                    <p>{player.index}. {player.id} {player.points}</p>
+                {/if}
+                    
+
             {/each}
         </div>
 

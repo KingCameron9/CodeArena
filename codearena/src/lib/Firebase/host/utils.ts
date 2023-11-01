@@ -8,20 +8,11 @@ export function secondsToTime(seconds: number) {
 }
 
 export function sortPlayersByScore(players: Player[]) {
-	let finishedList: any[] = [];
-	players.forEach((player) => {
-		if (player.finished != null) {
-			finishedList.push(player);
-			delete players[players.indexOf(player)];
-		}
-	});
-
 	let sorted = players.sort((a, b) => b.points - a.points);
-	finishedList.push(...sorted);
 
 	let rt: any[] = [];
 
-	finishedList.forEach((player, index) => {
+	sorted.forEach((player, index) => {
 		rt.push({ ...player, index: index + 1 });
 	});
 

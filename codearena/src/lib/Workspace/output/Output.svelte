@@ -5,6 +5,7 @@
     import type {Question} from '$lib/Questions/types'
     import type {FuncResult} from '$lib/Workspace/output/evaluate'
     import {questionNumber} from '$lib/Workspace/game/game'
+    import JSConfetti from 'js-confetti'
     let message: FuncResult | true; 
 
     function run(){
@@ -13,6 +14,8 @@
 
         if(message.success){
             $questionNumber += 1;
+            const jsConfetti = new JSConfetti();
+            jsConfetti.addConfetti();
         }
     }
 </script>
@@ -22,7 +25,9 @@
 {#if $questionStore.ready }
     
     <button id='start-button' on:click={run}>run</button>
-    <button on:click={() => {$questionNumber += 1}}>skip</button>
+    <button on:click={() => {
+        $questionNumber += 1; 
+    }}>skip</button>
 
 
 {/if}

@@ -1,7 +1,18 @@
 {
-	"/": [],
-	"/game": [],
-	"/host": [],
-	"/join": [],
-	"/testing": []
+	"/": [
+		"src/routes/+layout.js",
+		"src/routes/+layout.js"
+	],
+	"/game": [
+		"src/routes/+layout.js"
+	],
+	"/host": [
+		"src/routes/+layout.js"
+	],
+	"/join": [
+		"src/routes/+layout.js"
+	],
+	"/testing": [
+		"src/routes/+layout.js"
+	]
 }
