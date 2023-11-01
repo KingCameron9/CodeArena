@@ -9,6 +9,7 @@ export type Player = {
 export type Game = {
 	questions: string;
 	state: State;
+	time: number;
 };
 
 export enum State {

@@ -21,7 +21,7 @@
 
 {#if $questionStore.ready }
     
-    <button on:click={run}>run</button>
+    <button id='start-button' on:click={run}>run</button>
     <button on:click={() => {$questionNumber += 1}}>skip</button>
 
 
@@ -46,4 +46,39 @@
     <p style="color: white">Run some code to see it's output</p>
 
 {/if}
+
+<style>
+
+    #start-button {
+        background-color: rgb(45,45,45);
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    #start-button:hover {
+        background-color: rgb(50,50,50);
+    }
+
+    .player-container{
+        padding: 2px;
+        margin: 10px;
+        display: flex;
+        background-color: #272727;
+        height: min-content;
+        border-radius: 10px;
+        width: 12%;
+        align-items: center;
+        justify-content: center;
+    }
+
+</style>
 

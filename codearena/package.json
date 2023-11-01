@@ -33,6 +33,7 @@
 		"@monaco-editor/loader": "^1.4.0",
 		"firebase": "^10.4.0",
 		"isolated-vm": "^4.6.0",
+		"js-confetti": "^0.11.0",
 		"monaco-editor": "^0.43.0",
 		"svelte-markdown": "^0.4.0",
 		"svelte-splitpanes": "^0.8.0",

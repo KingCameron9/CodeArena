@@ -6,13 +6,56 @@
     import { docWrite } from '$lib/svelteblaze/stores/doc';
     import { colRead } from '$lib/svelteblaze/stores/col';
 	import { doc, getFirestore, setDoc } from 'firebase/firestore';
-	import { camelCaseConversion, pythagorean, reverseString } from '$lib/Questions/questions';
+	import { camelCaseConversion, pythagorean, reverseString, longestSubstringWithoutRepeating, stringCompression } from '$lib/Questions/questions';
+    import JSConfetti from 'js-confetti'
 
-    let code = "12345"/* Math.round(Math.random()*7); */
+    let code = "ABC" //Math.round(Math.random()*100000);
 
-    setDoc(doc(getFirestore(), '/games/'+code), {state: State.waiting, questions: JSON.stringify([pythagorean, reverseString, camelCaseConversion ])});
+    setDoc(doc(getFirestore(), '/games/'+code), {time: 100, state: State.waiting, questions: JSON.stringify([pythagorean, reverseString, camelCaseConversion, longestSubstringWithoutRepeating, stringCompression ])});
 
     const game = docWrite<Game>('/games/' + code);
+
+    let wait = -1;
+
+
+    function startGame(){
+
+        wait = 5;
+        const setWait = async () => {
+            setTimeout(() => {
+                wait--;
+                if(wait > 0){
+                    setWait();
+                } 
+                else{
+                    $game.state = State.playing;
+                    const time = async () => {
+                     setTimeout(() => {
+                        console.log('time');
+                        $game.time -= 1;
+                        if($game.time < 1){
+                            const jsConfetti = new JSConfetti();
+                            jsConfetti.addConfetti();
+                            
+                        }
+                        else{
+                            time();
+                        }
+                        
+                     }, 1000)
+                    }
+                    time();
+                }
+            }, 1000);
+
+
+        }
+
+        setWait();
+        
+
+    }
+
 
     const players = colRead<Player[]>('/games/' + code + '/players', []);
 
@@ -31,14 +74,12 @@ font-size: 25px;
 <div style="color: white; background-color: #1E1E1E; display: flex; align-items: center; width: 100vw; height: 100vh; flex-direction:column;">
     {#if $game?.state === State.waiting}
         <p style="color: white; font-size: 30px">{code}</p>
-        <button style="
-            width: 15%;
-            height: 7%;
-            border-color: rgb(0,0,0);
-            background-color: rgb(70,70,70);
-            border-width: 3px;
-            " 
-        on:click={() => {$game.state = State.playing}}>Start game</button>
+
+        {#if wait == -1}
+            <button id="start-button" on:click={startGame}>Start game</button>
+        {:else}
+            <p style="font-size: 25px; margin-bottom: 0">Starting in... {wait}</p>
+        {/if}
 
         <div class="players-container">
                 {#each $players as player}
@@ -62,6 +103,26 @@ font-size: 25px;
 </div>
 
 <style>
+
+    #start-button {
+        background-color: rgb(45,45,45);
+        color: white;
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+    #start-button:hover {
+        background-color: rgb(50,50,50);
+    }
+
     .player-container{
         padding: 2px;
         margin: 10px;
